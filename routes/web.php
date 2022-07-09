@@ -27,21 +27,24 @@ Route::get('/', function () {
 //     return view('checkout');
 // })->name('checkout');
 
-Route::post('checkout/{camp}', [CheckoutController::class, 'store'])->name('checkout.store');
 
 // Sosialite route
 Route::get('sign-in-google', [UserController::class, 'google'])->name('user.login.google');
 route::get('auth/google/callback', [UserController::class, 'handleProviderCallback'])->name('user.google.callback');
+// Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 
 
 
 route::middleware(['auth'])->group(function () {
     //Checkout Route
-    route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::get('checkout/success}', [CheckoutController::class, 'success'])->name('checkout.success');
+    Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+    Route::get('checkout/{camp:slug}', [CheckoutController::class, 'create'])->name('checkout.create');
+    Route::POST('checkout/{camp}', [CheckoutController::class, 'store'])->name('checkout.store');
+
 
     //User Dashboard
-    Route::get('checkout/{camp:slug}', [CheckoutController::class, 'create'])->name('checkout.create');
+    route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    route::get('dashboard/checkout/invoice/{checkout}', [CheckoutController::class, 'invoice'])->name('user.checkout.invoice');
 });
 
 // Route::get('/dashboard', function () {
