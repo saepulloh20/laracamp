@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Checkout extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['camp_id', 'user_id', 'card_number', 'expired', 'cvc', 'is_paid'];
+    protected $fillable = ['camp_id', 'user_id', 'payment_status', 'midtrans_url', 'midtrans_booking_code'];
 
     public function setExpiredAttribute($value)
     {
